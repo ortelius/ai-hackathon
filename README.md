@@ -30,6 +30,7 @@ To keep our project organized and prevent overwriting each other's edits, please
 
 ## Hackathon Docs
 
+- [Deliverables Doc](https://docs.google.com/document/d/1VWpsZTc3e-Wc1__tj7ceBKYdH3u_YYl1gYV207zRNf8/edit?tab=t.0#heading=h.6bzipwfqwisc)
 - [To-Do Check List](checklist.md)
 - [Test Case 1 Repo](https://github.com/ortelius/fastapi-vuln-demo)
 - [Test Case 2 Repo](https://github.com/ortelius/fastapi-vuln-demo)
