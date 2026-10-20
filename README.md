@@ -31,4 +31,5 @@ To keep our project organized and prevent overwriting each other's edits, please
 ## Hackathon Docs
 
 [To-Do Check List](checklist.md)
-
+[Test Case 1 Repo](https://github.com/ortelius/fastapi-vuln-demo)
+[Test Case 2 Repo](https://github.com/ortelius/fastapi-vuln-demo)
