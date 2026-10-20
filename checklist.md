@@ -12,11 +12,21 @@
 
 ### Test Case 1 — Successful CVE Remediation
 
-- [ ] Select Python dependency with a known CVE
-- [ ] Identify CVE ID, severity, and vulnerability description
-- [ ] Identify vulnerable package version
-- [ ] Identify patched package version
-- [ ] Verify patched version is compatible with the application
+- [X] Select Python dependency with a known CVE
+      
+      claude-agent-sdk (METADATA)
+- [X] Identify CVE ID, severity, and vulnerability description
+      
+      CVE-2026-96620 │ CRITICAL   
+- [X] Identify vulnerable package version
+      
+      0.2.118           
+- [X] Identify patched package version
+      
+      0.2.121 
+- [X] Verify patched version is compatible with the application
+      
+      No coding changes needed
 - [ ] Define any required dependency or Python source code changes
 - [ ] Define automated tests to verify application functionality
 - [ ] Define expected AI CLI behavior
