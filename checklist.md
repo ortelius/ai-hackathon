@@ -74,8 +74,9 @@
 - [X] Confirm Python version and dependency management (`requirements.txt`)
 - [X] Implement the vulnerable dependency defined for each test case
 - [X] Implement FastAPI application functionality needed for testing
-- [ ] Implement automated tests for each scenario
+- [X] Add Docker Build and Helm Release Workflows
 - [X] Verify applications run with their original vulnerable dependencies
+- [ ] Implement automated tests for each scenario
 - [ ] Verify baseline tests pass
 - [ ] Commit vulnerable baseline for each repository
 - [ ] Configure GitHub authentication for AI CLI
@@ -83,12 +84,14 @@
 
 ## 3. Ortelius Repository Onboarding
 
-- [ ] Onboard `fastapi-vuln-demo` into Ortelius
-- [ ] Onboard `fastapi-vuln-demo-unsafe` into Ortelius
-- [ ] Trigger release discovery and SBOM generation
-- [ ] Verify each repository has a release in Ortelius
-- [ ] Verify Python packages appear in release SBOMs
-- [ ] Verify expected CVEs are associated with each release
+- [X] Onboard `fastapi-vuln-demo` into Ortelius
+- [X] Onboard `fastapi-vuln-demo-unsafe` into Ortelius
+- [X] Trigger release discovery and SBOM generation
+- [X] Verify each repository has a release in Ortelius
+- [X] Verify Python packages appear in release SBOMs
+- [X] Verify expected CVEs are associated with each release
+
+      fasapi-vuln-demo has mismarked cve. fix is being worked on.
 - [ ] Record Ortelius release identifiers for both test cases
 
 ## 4. Ortelius API / MCP Dependencies
