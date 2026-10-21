@@ -90,8 +90,6 @@
 - [X] Verify each repository has a release in Ortelius
 - [X] Verify Python packages appear in release SBOMs
 - [X] Verify expected CVEs are associated with each release
-
-      fasapi-vuln-demo has mismarked cve. fix is being worked on.
 - [ ] Record Ortelius release identifiers for both test cases
 
 ## 4. Ortelius API / MCP Dependencies
