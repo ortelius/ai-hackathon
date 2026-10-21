@@ -27,7 +27,9 @@
 - [X] Verify patched version is compatible with the application
       
       No coding changes needed
-- [ ] Define any required dependency or Python source code changes
+- [X] Define any required dependency or Python source code changes
+
+      claude-agent-sdk needs to have dependency updated to 0.2.121 in requirements.txt
 - [ ] Define automated tests to verify application functionality
 - [ ] Define expected AI CLI behavior
 - [ ] Define expected successful remediation criteria
@@ -37,12 +39,27 @@
 
 ### Test Case 2 — Unsafe / Unsuccessful CVE Remediation
 
-- [ ] Select Python dependency with a known CVE
-- [ ] Identify CVE ID, severity, and vulnerability description
-- [ ] Identify vulnerable package version
-- [ ] Identify patched package version
-- [ ] Identify dependency conflicts or breaking API changes
-- [ ] Define why the proposed upgrade is unsafe
+- [X] Select Python dependency with a known CVE
+
+      h11
+- [X] Identify CVE ID, severity, and vulnerability description
+
+      CVE-2025-43859 │ CRITICAL
+- [X] Identify vulnerable package version
+
+      0.14.0
+- [X] Identify patched package version
+
+      0.16.0
+- [X] Identify dependency conflicts or breaking API changes
+
+      0.16.0
+- [X] Define why the proposed upgrade is unsafe
+
+      The conflict is caused by:
+          The user requested h11==0.16.0
+          uvicorn 0.54.0 depends on h11>=0.8
+          httpcore 1.0.5 depends on h11<0.15 and >=0.13
 - [ ] Define automated tests that expose the incompatibility
 - [ ] Define expected AI CLI failure detection and explanation
 - [ ] Define expected rejection or escalation criteria
@@ -52,13 +69,13 @@
 
 ## 2. GitHub Repository Setup
 
-- [ ] Create and configure `fastapi-vuln-demo`
-- [ ] Create and configure `fastapi-vuln-demo-unsafe`
-- [ ] Confirm Python version and dependency management (`requirements.txt`)
-- [ ] Implement the vulnerable dependency defined for each test case
-- [ ] Implement FastAPI application functionality needed for testing
+- [X] Create and configure `fastapi-vuln-demo`
+- [X] Create and configure `fastapi-vuln-demo-unsafe`
+- [X] Confirm Python version and dependency management (`requirements.txt`)
+- [X] Implement the vulnerable dependency defined for each test case
+- [X] Implement FastAPI application functionality needed for testing
 - [ ] Implement automated tests for each scenario
-- [ ] Verify applications run with their original vulnerable dependencies
+- [X] Verify applications run with their original vulnerable dependencies
 - [ ] Verify baseline tests pass
 - [ ] Commit vulnerable baseline for each repository
 - [ ] Configure GitHub authentication for AI CLI
@@ -76,15 +93,58 @@
 
 ## 4. Ortelius API / MCP Dependencies
 
-- [ ] Identify or implement Ortelius API endpoint to retrieve vulnerabilities for a release
-- [ ] Verify API response includes:
-  - [ ] Release identifier
-  - [ ] Package name and ecosystem (`pypi`)
-  - [ ] Installed package version
-  - [ ] CVE ID, severity, and CVSS
-  - [ ] Fixed package version, if available
-  - [ ] Direct/transitive dependency information, if available
-- [ ] Verify API authentication
+- [X] Identify or implement Ortelius API endpoint to retrieve vulnerabilities for a release
+
+```bash
+curl -s -X POST "https://app.deployhub.com/api/v1/graphql" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "query($name: String!, $version: String!) { release(name: $name, version: $version) { name version vulnerabilities { cve_id package affected_version full_purl fixed_in severity_rating severity_score } } }",
+    "variables": { "name": "ortelius/frontend", "version": "12.0.1652-g333bbf" }
+  }' \
+  | jq '.data.release.vulnerabilities[]
+        | select((.severity_rating | ascii_downcase) == "critical")
+        | {cve_id, package, affected_version, fixed_in}'
+```
+      
+- [X] Verify API response includes:
+  - [X] Release identifier
+  - [X] Package name and ecosystem (`pypi`)
+  - [X] Installed package version
+  - [X] CVE ID, severity, and CVSS
+  - [X] Fixed package version, if available
+
+```json
+{
+  "cve_id": "GHSA-vcvr-r3jv-pc5j",
+  "package": "pkg:npm/next@16.2.1",
+  "affected_version": "16.2.1",
+  "fixed_in": [
+    "16.3.6"
+  ]
+}
+{
+  "cve_id": "GHSA-2xp9-vwfh-vxw4",
+  "package": "pkg:npm/next@16.2.1",
+  "affected_version": "16.2.1",
+  "fixed_in": [
+    "16.3.3"
+  ]
+}
+{
+  "cve_id": "GHSA-p293-qw3h-jr36",
+  "package": "pkg:npm/next@16.2.1",
+  "affected_version": "16.2.1",
+  "fixed_in": [
+    "16.3.3"
+  ]
+}
+
+```
+
+- [X] Verify API authentication
+
+      No authentication needed
 - [ ] Test API against both releases
 - [ ] Expose functionality through Ortelius MCP if required
 - [ ] Verify AI CLI can retrieve vulnerability information
